@@ -1,28 +1,29 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment } from 'react'
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
+import Profile from './components/Profile'
+import LoginForm from './components/LoginForm'
+import LogOutPage from './components/LogOutPage'
+import Nav from './components/Nav'
+import NotFound from './components/NotFound'
+import EditForm from './components/EditForm'
+import './App.css'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+const App = props => {
+   // console.log('%c APP Props: ', 'color: firebrick', props)
+   return (
+     <Fragment>
+        <Nav />
+          <Switch>
+            <Route exact path='/' render={() => <Redirect to='/profile'/> } />
+
+            <Route exact path='/profile' component={Profile} />
+            <Route exact path='/edit' component={EditForm} />
+            <Route exact path='/login' component={LoginForm} />
+            <Route exact path='/logout' component={LogOutPage} />
+            <Route component= {NotFound} />
+          </Switch>
+     </Fragment>
+   )
 }
 
-export default App;
+export default withRouter(App)
