@@ -18,10 +18,14 @@ class LoginForm extends React.Component {
     this.setState({ username: '', password: '' }) //reset form to initial state
   }
 
+  handleClick = (e) => {
+    console.log(e);
+  }
+
   render() {
     // console.log('%c LOGIN FORM PROPS: ', 'color: red', this.props)
     return this.props.loggedIn ? ( //if user is logged in, redirect to profile
-      <Redirect to= "/profile" />
+      <Redirect to= "/home" />
     ) : (
       <Segment>
       <Form
@@ -51,6 +55,9 @@ class LoginForm extends React.Component {
           </Form.Group>
           <Button type="submit"> Login </Button>
         </Form>
+          <Message>
+            Don't have an account? <a href='/signup' onClick={this.handleClick}>Sign Up</a>
+          </Message>
       </Segment>
     )
   }

@@ -6,6 +6,9 @@ import LogOutPage from './components/LogOutPage'
 import Nav from './components/Nav'
 import NotFound from './components/NotFound'
 import EditForm from './components/EditForm'
+import Donation from './components/Donation'
+import SignUpForm from './components/SignUpForm'
+import CreateDonationForm from './components/CreateDonationForm'
 import './App.css'
 
 const App = props => {
@@ -16,8 +19,11 @@ const App = props => {
           <Switch>
             <Route exact path='/' render={() => <Redirect to='/profile'/> } />
 
+            <Route exact path='/home' component={CreateDonationForm} />
             <Route exact path='/profile' component={Profile} />
+            <Route exact path='/donations' component={Donation} />
             <Route exact path='/edit' component={EditForm} />
+            <Route exact path='/signup' component={SignUpForm} />
             <Route exact path='/login' component={LoginForm} />
             <Route exact path='/logout' component={LogOutPage} />
             <Route component= {NotFound} />

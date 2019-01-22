@@ -1,5 +1,5 @@
 const defaultState = {
-  user:null,
+  user:{},
   loggedIn: false,
   authenticatingUser: false,
   failedLogin: false,
@@ -14,10 +14,10 @@ const usersReducer = (state=defaultState, action) => {
       return {...state, authenticatingUser: true}
     case 'AUTHENTICATED_USER': //change state back to false after authenticating
       return {...state, authenticatingUser: false}
-    case 'EDIT_CURRENT_USER': 
-      return {...state, user: action.payload, loggedIn: true, authenticatingUser: false}
-    case 'LOG_OUT':
-      return {...state, loggedIn: false, authenticatingUser: false}
+    case 'EDIT_USER':
+      // console.log('old user', state.user, action.payload);
+      alert("Your changes have been saved. Redirecting you to your profile...")
+      return {...state, user: action.payload }
     case 'FAILED_LOGIN':
       return {
         ...state,
@@ -25,8 +25,10 @@ const usersReducer = (state=defaultState, action) => {
         error: action.payload,
         authenticatingUser: false
       }
+    case 'LOG_OUT':
+      return {...state, loggedIn: false, authenticatingUser: false}
     default:
-    return state
+      return state
   }
 }
 

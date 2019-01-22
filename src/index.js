@@ -10,9 +10,10 @@ import 'semantic-ui-css/semantic.min.css'
 
 import App from './App'
 import usersReducer from './reducers/usersReducer'
+import donationsReducer from './reducers/donationsReducer'
 import registerServiceWorker from './registerServiceWorker'
 
-const rootReducer = combineReducers({ usersReducer: usersReducer })
+const rootReducer = combineReducers({ usersReducer: usersReducer, donationsReducer: donationsReducer })
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
 // console.log(`%c INITIAL REDUX STORE`, 'color: purple', store.getState())

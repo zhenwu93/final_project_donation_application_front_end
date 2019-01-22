@@ -1,40 +1,27 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Redirect } from 'react-router'
-import { editUser } from '../actions/user'
-import { Button, Form, Segment } from 'semantic-ui-react'
-import withAuth from '../hocs/withAuth'
+import { signupUser } from '../actions/user'
+import { Button, Form, Segment, Message } from 'semantic-ui-react'
 
-class EditForm extends React.Component {
+class SignUpForm extends React.Component {
   state = {
-    id: '',
     first_name: '',
     last_name: '',
     address: '',
     username: '',
     password: '',
     email: '',
-    phone_number: '',
-  }
-
-  static getDerivedStateFromProps(props) {
-    let { user } = props
-    return {
-      id: user.id
-    }
+    phone_number: ''
   }
 
   handleChange = (e) => {
-    // console.log("Name :", e.target.name )
-    // console.log("Name :", e.target.value )
     this.setState({ [e.target.name ]: e.target.value })
   }
 
-  handleEditSubmit = (e) => {
-    //e.preventDefault() is taken care of by semantic forms
-    // console.log('%c EDIT FORM PROPS: ', 'color: blue', this.props)
-
-    this.props.editUser(this.state, this.props.history) // editUser from mapDispatchToProps
+  handleSignUpSubmit = (e) => {
+    // console.log(e);
+    this.props.signupUser(this.state, this.props.history)
 
     this.setState({
       first_name: '',
@@ -44,21 +31,20 @@ class EditForm extends React.Component {
       password: '',
       email: '',
       phone_number: ''
-     }) //reset form to initial state
+     })
   }
 
   render() {
-    // console.log(this.props);
-    // console.log(this.props.history);
-    // console.log(this.state);
-
-    return(
+    return this.props.loggedIn ? (
+      <Redirect to="/home" />
+    ):(
       <Segment>
       <Form
         size='mini'
         key='mini'
-        onSubmit={this.handleEditSubmit}
+        onSubmit={this.handleSignUpSubmit}
         loading={this.props.authenticatingUser}
+        error={this.props.failedLogin}
       >
         <Form.Group widths="equal">
           <Form.Input
@@ -112,28 +98,24 @@ class EditForm extends React.Component {
             value={this.state.phone_number}
           />
           </Form.Group>
-          <Button type="submit">Save Changes</Button>
+          <Button type="submit">Sign Up</Button>
         </Form>
       </Segment>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  // console.log(state)
-  // const { id, first_name, last_name, username, phone_number, address, email } = state.usersReducer.user;
-  // console.log('mapStateToProps', id, first_name, last_name, username, phone_number, address, email);
-  return {
-    user: state.usersReducer.user
-  }
-}
+const mapStateToProps = ({ usersReducer: { authenticatingUser, failedLogin, error, loggedIn } }) => ({
+  authenticatingUser,
+  failedLogin,
+  error,
+  loggedIn
+})
 
 const mapDispatchToProps = (dispatch) => {
-  // console.log('state is', state);
-  // console.log('history is', props.history);
   return {
-    editUser: (state, history) => dispatch(editUser(state, history))
+    signupUser: (state, history) => dispatch(signupUser(state, history))
   }
 }
 
-export default withAuth(connect(mapStateToProps, mapDispatchToProps)(withRouter(EditForm)))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignUpForm))
