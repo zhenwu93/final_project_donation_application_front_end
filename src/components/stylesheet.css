@@ -1,0 +1,79 @@
+#login-background {
+ background-image: url('../assets/flower.jpg');
+ height: 100vh !important;
+ background-color: #cccccc;
+ background-position: center;
+ background-repeat: no-repeat;
+ background-size: cover;
+ position: relative;
+}
+
+#login-form {
+  opacity: 0.90;
+}
+
+#login-message {
+  opacity: 0.75;
+}
+
+#signup-form {
+  opacity: 0.80;
+}
+
+#create-donation-form {
+  opacity: 0.80;
+}
+
+#profile-form {
+  opacity: 0.90;
+}
+
+#create-donations-background {
+  background-image: url('../assets/campbells.jpg');
+  background-color: #cccccc;
+  height: 100vh !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+#donation-background {
+  background-image: url('../assets/giving.jpg');
+  background-color: #cccccc;
+  height: 100vh !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+#editform-background {
+  background-image: url('../assets/love.jpg');
+  background-color: #cccccc;
+  height: 100vh !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+#signup {
+  background-image: url('../assets/seeking.jpg');
+  background-color: #cccccc;
+  height: 100vh !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+#profile-background {
+  background-image: url('../assets/monk.jpg');
+  background-color: #cccccc;
+  height: 100vh !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}

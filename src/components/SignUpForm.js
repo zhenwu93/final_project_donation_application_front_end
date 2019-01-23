@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Redirect } from 'react-router'
 import { signupUser } from '../actions/user'
-import { Button, Form, Segment, Message } from 'semantic-ui-react'
+import { Button, Form, Segment, Message, Checkbox, Grid, Header, Image } from 'semantic-ui-react'
 
 class SignUpForm extends React.Component {
   state = {
@@ -38,16 +38,20 @@ class SignUpForm extends React.Component {
     return this.props.loggedIn ? (
       <Redirect to="/home" />
     ):(
-      <Segment>
-      <Form
-        size='mini'
-        key='mini'
-        onSubmit={this.handleSignUpSubmit}
-        loading={this.props.authenticatingUser}
-        error={this.props.failedLogin}
-      >
-        <Form.Group widths="equal">
+      <Grid textAlign='center' style={{ height: '75%' }} verticalAlign='middle' id='signup'>
+        <Grid.Column style={{ maxWidth: 450 }}>
+        <Form
+          id='signup-form'
+          size='mini'
+          key='mini'
+          onSubmit={this.handleSignUpSubmit}
+          loading={this.props.authenticatingUser}
+          error={this.props.failedLogin}
+        >
+        <Segment stacked>
           <Form.Input
+            fluid icon='user'
+            iconPosition='left'
             label="Username"
             placeholder="Username"
             name="username"
@@ -55,6 +59,8 @@ class SignUpForm extends React.Component {
             value={this.state.username}
           />
           <Form.Input
+            fluid icon='lock'
+            iconPosition='left'
             type="password"
             label="Password"
             placeholder="Password"
@@ -62,6 +68,7 @@ class SignUpForm extends React.Component {
             onChange={this.handleChange}
             value={this.state.password}
           />
+
           <Form.Input
             label="First Name"
             placeholder="First Name"
@@ -77,6 +84,8 @@ class SignUpForm extends React.Component {
             value={this.state.last_name}
           />
           <Form.Input
+            fluid icon='mail'
+            iconPosition='left'
             label="E-mail"
             placeholder="E-mail"
             name="email"
@@ -84,6 +93,8 @@ class SignUpForm extends React.Component {
             value={this.state.email}
           />
           <Form.Input
+            fluid icon='home'
+            iconPosition='left'
             label="Address"
             placeholder="Address"
             name="address"
@@ -91,16 +102,22 @@ class SignUpForm extends React.Component {
             value={this.state.address}
           />
           <Form.Input
+            fluid icon='phone'
+            iconPosition='left'
             label="Phone Number"
             placeholder="Phone Number"
             name="phone_number"
             onChange={this.handleChange}
             value={this.state.phone_number}
           />
-          </Form.Group>
-          <Button type="submit">Sign Up</Button>
-        </Form>
-      </Segment>
+            <Form.Field>
+              <Checkbox label='I agree to the terms and conditions' />
+            </Form.Field>
+              <Button type="submit" color='red' fluid size='large'>Sign Up</Button>
+            </Segment>
+          </Form>
+        </Grid.Column>
+      </Grid>
     )
   }
 }

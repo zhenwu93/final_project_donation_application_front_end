@@ -2,7 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Redirect } from 'react-router'
 import { loginUser } from '../actions/user'
-import { Button, Form, Segment, Message } from 'semantic-ui-react'
+import { Button, Form, Segment, Message, Grid, Image, Header } from 'semantic-ui-react'
+import './stylesheet.css'
 
 class LoginForm extends React.Component {
   state = { username: '', password: '' }
@@ -27,17 +28,23 @@ class LoginForm extends React.Component {
     return this.props.loggedIn ? ( //if user is logged in, redirect to profile
       <Redirect to= "/home" />
     ) : (
-      <Segment>
-      <Form
-        size='mini'
-        key='mini'
-        onSubmit={this.handleLoginSubmit}
-        loading={this.props.authenticatingUser}
-        error={this.failedLogin}
-      >
+      <>
+      <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle' id='login-background'>
+        <Grid.Column style={{ maxWidth: 450 }}>
+        <Form
+          size='large'
+          key='mini'
+          onSubmit={this.handleLoginSubmit}
+          loading={this.props.authenticatingUser}
+          error={this.failedLogin}
+          id='login-form'
+        >
+        <Segment stacked>
         <Message error header={ this.props.failedLogin? this.props.error: null } />
         <Form.Group widths="equal">
           <Form.Input
+            fluid icon='user'
+            iconPosition='left'
             label="Username"
             placeholder="Username"
             name="username"
@@ -45,6 +52,8 @@ class LoginForm extends React.Component {
             value={this.state.username}
           />
           <Form.Input
+            fluid icon='lock'
+            iconPosition='left'
             type="password"
             label="Password"
             placeholder="Password"
@@ -53,12 +62,15 @@ class LoginForm extends React.Component {
             value={this.state.password}
           />
           </Form.Group>
-          <Button type="submit"> Login </Button>
+          <Button type="submit" color='red' fluid size='large'> Login </Button>
+          </Segment>
         </Form>
-          <Message>
+          <Message id='login-message'>
             Don't have an account? <a href='/signup' onClick={this.handleClick}>Sign Up</a>
           </Message>
-      </Segment>
+        </Grid.Column>
+      </Grid>
+    </>
     )
   }
 } // end of Login Form

@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Form, Button, Segment } from 'semantic-ui-react'
 import { createDonation } from '../actions/donation.js'
 import { withRouter, Redirect } from 'react-router'
 import withAuth from '../hocs/withAuth'
+import { Form, Button, Segment, Grid, Image, Header } from 'semantic-ui-react'
+import './stylesheet.css'
 
 class CreateDonationForm extends React.Component {
   state = {
@@ -35,17 +36,25 @@ class CreateDonationForm extends React.Component {
     // debugger
     // const { fireRedirect } = this.state
     return(
-      <Segment>
+        <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle' id="donation-background">
+        <Grid.Column style={{ maxWidth: 450 }}>
+
         <Form
+          id='create-donation-form'
           size='mini'
           key='mini'
           onSubmit={this.handleDonationSubmit}
           loading={this.props.addingDonation}
           // error={this.failedLogin}
         >
-
-        <Form.Group widths="equal">
+        <Segment stacked>
+        <Header as='h2' color='black' textAlign='center'>
+          Submit a Donation
+        </Header>
           <Form.Input
+            fluid icon='calendar'
+            iconPosition='left'
+            type='date'
             label="Date"
             placeholder="Date"
             name="date"
@@ -53,23 +62,26 @@ class CreateDonationForm extends React.Component {
             value={this.state.date}
           />
           <Form.Input
-            label="Description"
-            placeholder="Description"
-            name="description"
-            onChange={this.handleChange}
-            value={this.state.description}
-          />
-          <Form.Input
+            fluid icon='image'
+            iconPosition='left'
             label="Image"
             placeholder="Image"
             name="avatar"
             onChange={this.handleChange}
             value={this.state.avatar}
           />
-          </Form.Group>
-          <Button type="submit"> Create Donation </Button>
-        </Form>
-      </Segment>
+          <Form.TextArea
+            label="Description"
+            placeholder="Description"
+            name="description"
+            onChange={this.handleChange}
+            value={this.state.description}
+          />
+            <Button type="submit" color='red' fluid size='large'> Create Donation </Button>
+            </Segment>
+          </Form>
+        </Grid.Column>
+      </Grid>
     )
   }
 }
